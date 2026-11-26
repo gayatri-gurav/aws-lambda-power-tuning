@@ -1,0 +1,3 @@
+# Exclude generated reports and visual assets from GitHub Linguist language statistics
+reports/** linguist-generated=true
+assets/** linguist-generated=true
