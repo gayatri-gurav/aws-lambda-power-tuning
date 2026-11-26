@@ -41,29 +41,9 @@ Instead of guessing Lambda memory once and forgetting it, this project benchmark
 
 ## Architecture & Automation Flow
 
-```mermaid
-flowchart LR
-    Dev["Developer / Schedule"] -->|"PR or Push to main"| GHA["GitHub Actions CI/CD"]
-    GHA -->|"OIDC Token (No Static Keys)"| IAM["AWS IAM OIDC Role"]
-    IAM -->|"AssumeRoleWithWebIdentity"| TF["Terraform Deploy"]
-
-    subgraph AWS["AWS Workload & Tuning Stack"]
-        TF --> APIGW["API Gateway (REST /prod)"]
-        APIGW --> Lambda["AWS Lambda (Python 3.11)"]
-        Lambda --> DDB["DynamoDB (PAY_PER_REQUEST)"]
-        TF --> SAR["Step Functions: AWS Lambda Power Tuning (SAR)"]
-        SAR -->|"Parallel Benchmarks (128..1024 MB)"| Lambda
-        TF --> S3["S3 Reports Bucket (Versioned + KMS)"]
-    end
-
-    SAR -->|"Cost vs. Duration Curve"| Summary["Generate HTML/MD/JSON Reports"]
-    Summary --> Gate{"ask_approval = true?"}
-    Gate -->|"Yes"| Approval["Human Approval Gate (GitHub Issue)"]
-    Gate -->|"No"| Update["Update Lambda Memory Size"]
-    Approval -->|"Approved"| Update
-    Update --> Newman["Newman / Postman API Smoke & Load Tests"]
-    Newman -->|"Upload Evidence"| S3
-```
+<p align="center">
+  <img src="assets/architecture-flow.svg" alt="Automated AWS Lambda Power Tuning Architecture and CI/CD Automation Flow" width="100%" />
+</p>
 
 ### Key Architectural Characteristics
 
@@ -115,6 +95,8 @@ Benchmarked under a 2-minute ramp-up load test (10 virtual users):
 
 ```text
 .
+├── assets/
+│   └── architecture-flow.svg      # Animated end-to-end architecture & CI/CD diagram
 ├── infra/terraform/
 │   ├── apigateway.tf              # REST API (/items, /items/{id}) + prod stage
 │   ├── backend.tf                 # S3 remote state + DynamoDB locking + AWS providers

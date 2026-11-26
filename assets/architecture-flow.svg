@@ -1,0 +1,429 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" width="1200" height="740" role="img" aria-label="Automated AWS Lambda Power Tuning Architecture and CI/CD Automation Flow">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="50%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#0b1324"/>
+    </linearGradient>
+
+    <linearGradient id="awsBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#131c31" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#0e1729" stop-opacity="0.95"/>
+    </linearGradient>
+
+    <linearGradient id="lambdaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a1d0c"/>
+      <stop offset="100%" stop-color="#1b1410"/>
+    </linearGradient>
+
+    <linearGradient id="sfnGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#271230"/>
+      <stop offset="100%" stop-color="#1a1126"/>
+    </linearGradient>
+
+    <linearGradient id="s3Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0d261f"/>
+      <stop offset="100%" stop-color="#0c1c1b"/>
+    </linearGradient>
+
+    <pattern id="dotGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#1e293b" opacity="0.65"/>
+    </pattern>
+
+    <filter id="glowCyan" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glowOrange" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glowMagenta" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glowEmerald" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#60a5fa"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#c084fc"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#fb923c"/>
+    </marker>
+    <marker id="arrowMagenta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#e879f9"/>
+    </marker>
+    <marker id="arrowEmerald" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#34d399"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24"/>
+    </marker>
+
+    <style>
+      .font { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+      .title { font-size: 18px; font-weight: 700; fill: #f8fafc; letter-spacing: 0.2px; }
+      .subtitle { font-size: 12px; fill: #94a3b8; }
+      .legend-txt { font-size: 11px; font-weight: 600; fill: #cbd5e1; }
+      .node-title { font-size: 13.5px; font-weight: 700; fill: #f8fafc; }
+      .node-sub { font-size: 11px; fill: #94a3b8; }
+      .node-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.6px; }
+      .edge-label { font-size: 10.5px; font-weight: 600; fill: #cbd5e1; }
+      .aws-title { font-size: 12px; font-weight: 700; fill: #fbbf24; letter-spacing: 0.4px; }
+
+      .flow-line {
+        fill: none;
+        stroke-width: 2.2;
+        stroke-dasharray: 7 5;
+        animation: dashFlow 1.2s linear infinite;
+      }
+      .flow-line-slow {
+        fill: none;
+        stroke-width: 2;
+        stroke-dasharray: 6 6;
+        animation: dashFlow 1.8s linear infinite;
+      }
+      .flow-line-fast {
+        fill: none;
+        stroke-width: 2.4;
+        stroke-dasharray: 6 4;
+        animation: dashFlow 0.85s linear infinite;
+      }
+      @keyframes dashFlow {
+        from { stroke-dashoffset: 24; }
+        to { stroke-dashoffset: 0; }
+      }
+
+      .pulse-ring {
+        animation: pulseGlow 2.4s ease-in-out infinite;
+      }
+      .pulse-ring-delay {
+        animation: pulseGlow 2.4s ease-in-out 1.2s infinite;
+      }
+      @keyframes pulseGlow {
+        0%, 100% { opacity: 0.35; }
+        50% { opacity: 0.95; }
+      }
+
+      .status-dot {
+        animation: blinkDot 1.8s ease-in-out infinite;
+      }
+      @keyframes blinkDot {
+        0%, 100% { opacity: 0.4; }
+        50% { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect x="0" y="0" width="1200" height="740" rx="16" fill="url(#bgGrad)"/>
+  <rect x="0" y="0" width="1200" height="740" rx="16" fill="url(#dotGrid)"/>
+  <rect x="1" y="1" width="1198" height="738" rx="15" fill="none" stroke="#1e293b" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="62" rx="16" fill="#0f172a" opacity="0.85"/>
+  <line x1="0" y1="62" x2="1200" y2="62" stroke="#1e293b" stroke-width="1"/>
+  <circle cx="28" cy="31" r="6" fill="#ff9900" class="status-dot" filter="url(#glowOrange)"/>
+  <text x="44" y="29" class="font title">Automated AWS Lambda Power Tuning</text>
+  <text x="44" y="47" class="font subtitle">Keyless OIDC CI/CD  ·  Step Functions Power Benchmarking  ·  Governed Memory Optimization  ·  Audit Evidence</text>
+
+  <!-- Legend Pills -->
+  <g transform="translate(760, 19)">
+    <rect x="0" y="0" width="124" height="24" rx="12" fill="#111c33" stroke="#334155" stroke-width="1"/>
+    <circle cx="14" cy="12" r="4" fill="#38bdf8" class="status-dot"/>
+    <text x="24" y="16" class="font legend-txt">OIDC / CI/CD</text>
+
+    <rect x="134" y="0" width="140" height="24" rx="12" fill="#22132e" stroke="#6b21a8" stroke-width="1"/>
+    <circle cx="148" cy="12" r="4" fill="#e879f9" class="status-dot"/>
+    <text x="158" y="16" class="font legend-txt">Power Tuning Loop</text>
+
+    <rect x="284" y="0" width="132" height="24" rx="12" fill="#0d261f" stroke="#065f46" stroke-width="1"/>
+    <circle cx="298" cy="12" r="4" fill="#34d399" class="status-dot"/>
+    <text x="308" y="16" class="font legend-txt">Audit &amp; FinOps</text>
+  </g>
+
+  <!-- ===================================================================== -->
+  <!-- ROW 1: CI/CD & KEYLESS OIDC AUTHENTICATION                            -->
+  <!-- ===================================================================== -->
+
+  <!-- Node 1: Developer / Schedule -->
+  <g transform="translate(36, 84)">
+    <rect width="200" height="78" rx="12" fill="#131c31" stroke="#6366f1" stroke-width="1.6"/>
+    <rect x="12" y="11" width="66" height="16" rx="8" fill="#1e1b4b"/>
+    <text x="45" y="22.5" text-anchor="middle" class="font node-tag" fill="#a5b4fc">TRIGGER</text>
+    <text x="14" y="45" class="font node-title">Developer / Schedule</text>
+    <text x="14" y="63" class="font node-sub">PR · Push to main · Cron</text>
+  </g>
+
+  <!-- Edge 1: Dev -> GitHub Actions -->
+  <path id="p_dev_gha" d="M 236 123 L 314 123" class="flow-line" stroke="#60a5fa" marker-end="url(#arrowBlue)"/>
+  <text x="275" y="113" text-anchor="middle" class="font edge-label">PR / Push</text>
+  <circle r="3.5" fill="#93c5fd" filter="url(#glowCyan)">
+    <animateMotion dur="1.6s" repeatCount="indefinite" path="M 236 123 L 314 123"/>
+  </circle>
+
+  <!-- Node 2: GitHub Actions CI/CD -->
+  <g transform="translate(316, 84)">
+    <rect width="220" height="78" rx="12" fill="#131c31" stroke="#3b82f6" stroke-width="1.6"/>
+    <rect x="12" y="11" width="56" height="16" rx="8" fill="#172554"/>
+    <text x="40" y="22.5" text-anchor="middle" class="font node-tag" fill="#93c5fd">CI / CD</text>
+    <circle cx="204" cy="19" r="3.5" fill="#60a5fa" class="status-dot"/>
+    <text x="14" y="45" class="font node-title">GitHub Actions</text>
+    <text x="14" y="63" class="font node-sub">power-tune.yml Pipeline</text>
+  </g>
+
+  <!-- Edge 2: GitHub Actions -> IAM OIDC -->
+  <path id="p_gha_oidc" d="M 536 123 L 634 123" class="flow-line" stroke="#2dd4bf" marker-end="url(#arrowBlue)"/>
+  <text x="585" y="113" text-anchor="middle" class="font edge-label">OIDC JWT</text>
+  <circle r="3.5" fill="#5eead4" filter="url(#glowCyan)">
+    <animateMotion dur="1.8s" begin="0.3s" repeatCount="indefinite" path="M 536 123 L 634 123"/>
+  </circle>
+
+  <!-- Node 3: AWS IAM OIDC Role -->
+  <g transform="translate(636, 84)">
+    <rect width="220" height="78" rx="12" fill="#10222b" stroke="#14b8a6" stroke-width="1.6"/>
+    <rect x="12" y="11" width="84" height="16" rx="8" fill="#042f2e"/>
+    <text x="54" y="22.5" text-anchor="middle" class="font node-tag" fill="#5eead4">KEYLESS AUTH</text>
+    <text x="14" y="45" class="font node-title">AWS IAM OIDC Role</text>
+    <text x="14" y="63" class="font node-sub">Short-lived STS · Zero Keys</text>
+  </g>
+
+  <!-- Edge 3: IAM OIDC -> Terraform Deploy -->
+  <path id="p_oidc_tf" d="M 856 123 L 954 123" class="flow-line" stroke="#c084fc" marker-end="url(#arrowPurple)"/>
+  <text x="905" y="113" text-anchor="middle" class="font edge-label">AssumeRole</text>
+  <circle r="3.5" fill="#d8b4fe" filter="url(#glowMagenta)">
+    <animateMotion dur="1.8s" begin="0.6s" repeatCount="indefinite" path="M 856 123 L 954 123"/>
+  </circle>
+
+  <!-- Node 4: Terraform Deploy -->
+  <g transform="translate(956, 84)">
+    <rect width="208" height="78" rx="12" fill="#1e1533" stroke="#a855f7" stroke-width="1.6"/>
+    <rect x="12" y="11" width="76" height="16" rx="8" fill="#3b0764"/>
+    <text x="50" y="22.5" text-anchor="middle" class="font node-tag" fill="#d8b4fe">TERRAFORM</text>
+    <text x="14" y="45" class="font node-title">Terraform Deploy</text>
+    <text x="14" y="63" class="font node-sub">IaC · S3 State + DDB Lock</text>
+  </g>
+
+  <!-- ===================================================================== -->
+  <!-- ROW 2: AWS WORKLOAD & POWER TUNING STACK                              -->
+  <!-- ===================================================================== -->
+
+  <rect x="36" y="196" width="1128" height="260" rx="14" fill="url(#awsBg)" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="8 5" opacity="0.95"/>
+  <rect x="52" y="185" width="330" height="22" rx="11" fill="#1f1a0f" stroke="#f59e0b" stroke-width="1.2"/>
+  <text x="66" y="200" class="font aws-title">AWS Cloud — Workload &amp; Power Tuning Stack</text>
+
+  <!-- Terraform Deploy Bus down into AWS resources -->
+  <path d="M 1060 162 L 1060 218 L 171 218 L 171 238" class="flow-line-slow" stroke="#c084fc" marker-end="url(#arrowPurple)"/>
+  <path d="M 491 218 L 491 238" class="flow-line-slow" stroke="#c084fc" marker-end="url(#arrowPurple)"/>
+  <path d="M 806 218 L 806 238" class="flow-line-slow" stroke="#c084fc" marker-end="url(#arrowPurple)"/>
+  <path d="M 1060 218 L 1060 238" class="flow-line-slow" stroke="#c084fc" marker-end="url(#arrowPurple)"/>
+  <circle r="3" fill="#d8b4fe" filter="url(#glowMagenta)">
+    <animateMotion dur="3.2s" repeatCount="indefinite" path="M 1060 162 L 1060 218 L 171 218 L 171 238"/>
+  </circle>
+  <circle r="3" fill="#d8b4fe" filter="url(#glowMagenta)">
+    <animateMotion dur="2.2s" begin="0.8s" repeatCount="indefinite" path="M 1060 162 L 1060 218 L 491 218 L 491 238"/>
+  </circle>
+
+  <!-- API Gateway -->
+  <g transform="translate(66, 240)">
+    <rect width="210" height="78" rx="12" fill="#241326" stroke="#ec4899" stroke-width="1.6"/>
+    <rect x="12" y="11" width="76" height="16" rx="8" fill="#500724"/>
+    <text x="50" y="22.5" text-anchor="middle" class="font node-tag" fill="#f9a8d4">API GATEWAY</text>
+    <text x="14" y="45" class="font node-title">REST API (/prod)</text>
+    <text x="14" y="63" class="font node-sub">/items · /items/{id}</text>
+  </g>
+
+  <!-- Edge: API Gateway -> Lambda -->
+  <path d="M 276 279 L 364 279" class="flow-line" stroke="#fb923c" marker-end="url(#arrowOrange)"/>
+  <text x="320" y="269" text-anchor="middle" class="font edge-label">AWS_PROXY</text>
+  <circle r="3.5" fill="#fdba74" filter="url(#glowOrange)">
+    <animateMotion dur="1.5s" repeatCount="indefinite" path="M 276 279 L 364 279"/>
+  </circle>
+
+  <!-- AWS Lambda (Hero Node) -->
+  <g transform="translate(366, 236)">
+    <rect x="-3" y="-3" width="256" height="92" rx="14" fill="none" stroke="#ff9900" stroke-width="2" opacity="0.55" class="pulse-ring" filter="url(#glowOrange)"/>
+    <rect width="250" height="86" rx="12" fill="url(#lambdaGrad)" stroke="#ff9900" stroke-width="2"/>
+    <rect x="12" y="11" width="84" height="16" rx="8" fill="#451a03"/>
+    <text x="54" y="22.5" text-anchor="middle" class="font node-tag" fill="#fdba74">AWS LAMBDA</text>
+    <circle cx="234" cy="19" r="4" fill="#ff9900" class="status-dot"/>
+    <text x="14" y="47" class="font node-title">Python 3.11 CRUD Handler</text>
+    <text x="14" y="66" class="font node-sub">Auto-Tuned Memory (128 → 1024 MB)</text>
+  </g>
+
+  <!-- Edge: Lambda -> DynamoDB -->
+  <path d="M 616 279 L 704 279" class="flow-line" stroke="#60a5fa" marker-end="url(#arrowBlue)"/>
+  <text x="660" y="269" text-anchor="middle" class="font edge-label">CRUD</text>
+  <circle r="3.5" fill="#93c5fd" filter="url(#glowCyan)">
+    <animateMotion dur="1.5s" begin="0.4s" repeatCount="indefinite" path="M 616 279 L 704 279"/>
+  </circle>
+
+  <!-- Amazon DynamoDB -->
+  <g transform="translate(706, 240)">
+    <rect width="200" height="78" rx="12" fill="#101f36" stroke="#38bdf8" stroke-width="1.6"/>
+    <rect x="12" y="11" width="76" height="16" rx="8" fill="#0c4a6e"/>
+    <text x="50" y="22.5" text-anchor="middle" class="font node-tag" fill="#7dd3fc">DYNAMODB</text>
+    <text x="14" y="45" class="font node-title">LambdaPowerTuning</text>
+    <text x="14" y="63" class="font node-sub">PAY_PER_REQUEST Table</text>
+  </g>
+
+  <!-- Parallel Benchmark Loop: Step Functions <-> Lambda -->
+  <path d="M 465 372 L 465 325" class="flow-line-fast" stroke="#e879f9" marker-end="url(#arrowMagenta)"/>
+  <path d="M 517 325 L 517 372" class="flow-line-fast" stroke="#ff9900" marker-end="url(#arrowOrange)"/>
+  <circle r="3.5" fill="#f0abfc" filter="url(#glowMagenta)">
+    <animateMotion dur="1.1s" repeatCount="indefinite" path="M 465 372 L 465 325"/>
+  </circle>
+  <circle r="3.5" fill="#fdba74" filter="url(#glowOrange)">
+    <animateMotion dur="1.1s" begin="0.55s" repeatCount="indefinite" path="M 517 325 L 517 372"/>
+  </circle>
+  <rect x="534" y="337" width="182" height="22" rx="11" fill="#271230" stroke="#a21caf" stroke-width="1"/>
+  <text x="625" y="352" text-anchor="middle" class="font edge-label" fill="#f0abfc">Parallel Invokes (20x / profile)</text>
+
+  <!-- Step Functions: AWS Lambda Power Tuning (SAR) -->
+  <g transform="translate(246, 374)">
+    <rect x="-2" y="-2" width="494" height="70" rx="13" fill="none" stroke="#d946ef" stroke-width="1.6" opacity="0.5" class="pulse-ring-delay" filter="url(#glowMagenta)"/>
+    <rect width="490" height="66" rx="12" fill="url(#sfnGrad)" stroke="#d946ef" stroke-width="1.8"/>
+    <rect x="14" y="10" width="142" height="16" rx="8" fill="#4a044e"/>
+    <text x="85" y="21.5" text-anchor="middle" class="font node-tag" fill="#f0abfc">STEP FUNCTIONS (SAR)</text>
+    <text x="14" y="44" class="font node-title">AWS Lambda Power Tuning State Machine</text>
+    <text x="14" y="59" class="font node-sub">Benchmarks 128 · 256 · 512 · 1024 MB  |  Balanced Cost &amp; Latency Strategy</text>
+  </g>
+
+  <!-- Amazon S3 Reports Bucket (Tall Audit Card) -->
+  <g transform="translate(944, 240)">
+    <rect x="-2" y="-2" width="198" height="204" rx="13" fill="none" stroke="#10b981" stroke-width="1.6" opacity="0.45" class="pulse-ring" filter="url(#glowEmerald)"/>
+    <rect width="194" height="200" rx="12" fill="url(#s3Grad)" stroke="#10b981" stroke-width="1.8"/>
+    <rect x="12" y="12" width="90" height="16" rx="8" fill="#064e3b"/>
+    <text x="57" y="23.5" text-anchor="middle" class="font node-tag" fill="#6ee7b7">AUDIT STORAGE</text>
+    <circle cx="178" cy="20" r="3.5" fill="#34d399" class="status-dot"/>
+    <text x="14" y="50" class="font node-title">Amazon S3 Bucket</text>
+    <text x="14" y="69" class="font node-sub">Versioned + AWS KMS</text>
+    <line x1="14" y1="84" x2="180" y2="84" stroke="#065f46" stroke-width="1"/>
+    <text x="14" y="104" class="font node-sub" fill="#a7f3d0">• tuning-output.json</text>
+    <text x="14" y="123" class="font node-sub" fill="#a7f3d0">• power-tuner-report.html</text>
+    <text x="14" y="142" class="font node-sub" fill="#a7f3d0">• memory-summary.md</text>
+    <text x="14" y="161" class="font node-sub" fill="#a7f3d0">• newman smoke reports</text>
+    <text x="14" y="185" class="font node-tag" fill="#34d399">FINOPS · ATHENA · AUDIT</text>
+  </g>
+
+  <!-- ===================================================================== -->
+  <!-- ROW 3: GOVERNANCE, APPLY & REAL-TRAFFIC VALIDATION                    -->
+  <!-- ===================================================================== -->
+
+  <!-- Edge: Step Functions -> Generate Reports -->
+  <path d="M 320 440 L 320 484 L 139 484 L 139 524" class="flow-line" stroke="#e879f9" marker-end="url(#arrowMagenta)"/>
+  <rect x="174" y="472" width="136" height="22" rx="11" fill="#131c31" stroke="#6366f1" stroke-width="1"/>
+  <text x="242" y="487" text-anchor="middle" class="font edge-label">Cost vs. Latency Curve</text>
+  <circle r="3.5" fill="#f0abfc" filter="url(#glowMagenta)">
+    <animateMotion dur="2.2s" repeatCount="indefinite" path="M 320 440 L 320 484 L 139 484 L 139 524"/>
+  </circle>
+
+  <!-- Node: Generate Reports -->
+  <g transform="translate(36, 526)">
+    <rect width="206" height="80" rx="12" fill="#131c31" stroke="#818cf8" stroke-width="1.6"/>
+    <rect x="12" y="11" width="76" height="16" rx="8" fill="#1e1b4b"/>
+    <text x="50" y="22.5" text-anchor="middle" class="font node-tag" fill="#c7d2fe">EVIDENCE</text>
+    <text x="14" y="46" class="font node-title">Generate Reports</text>
+    <text x="14" y="65" class="font node-sub">JSON · HTML · MD Summary</text>
+  </g>
+
+  <!-- Edge: Generate Reports -> Decision Gate -->
+  <path d="M 242 566 L 314 566" class="flow-line" stroke="#fbbf24" marker-end="url(#arrowAmber)"/>
+  <circle r="3.5" fill="#fde68a" filter="url(#glowOrange)">
+    <animateMotion dur="1.4s" repeatCount="indefinite" path="M 242 566 L 314 566"/>
+  </circle>
+
+  <!-- Decision Diamond: ask_approval = true? -->
+  <g>
+    <polygon points="382,520 452,566 382,612 312,566" fill="#261c0c" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="382" y="562" text-anchor="middle" class="font node-title" style="font-size:12px" fill="#fde68a">ask_approval</text>
+    <text x="382" y="579" text-anchor="middle" class="font node-sub" fill="#fcd34d">= true?</text>
+  </g>
+
+  <!-- Branch NO (Auto-Apply): Diamond -> Update Lambda Memory -->
+  <path d="M 452 566 L 684 566" class="flow-line" stroke="#fb923c" marker-end="url(#arrowOrange)"/>
+  <rect x="510" y="542" width="116" height="20" rx="10" fill="#1f1712" stroke="#9a3412" stroke-width="1"/>
+  <text x="568" y="556" text-anchor="middle" class="font edge-label" fill="#fdba74">No (Auto-Apply)</text>
+  <circle r="3.5" fill="#fdba74" filter="url(#glowOrange)">
+    <animateMotion dur="2s" repeatCount="indefinite" path="M 452 566 L 684 566"/>
+  </circle>
+
+  <!-- Branch YES: Diamond -> Human Approval Gate -->
+  <path d="M 382 612 L 382 670 L 454 670" class="flow-line" stroke="#fbbf24" marker-end="url(#arrowAmber)"/>
+  <text x="404" y="656" class="font edge-label" fill="#fde68a">Yes</text>
+  <circle r="3.5" fill="#fde68a" filter="url(#glowOrange)">
+    <animateMotion dur="1.8s" begin="0.3s" repeatCount="indefinite" path="M 382 612 L 382 670 L 454 670"/>
+  </circle>
+
+  <!-- Node: Human Approval Gate -->
+  <g transform="translate(456, 632)">
+    <rect width="206" height="74" rx="12" fill="#241c0d" stroke="#fbbf24" stroke-width="1.6"/>
+    <rect x="12" y="10" width="84" height="16" rx="8" fill="#451a03"/>
+    <text x="54" y="21.5" text-anchor="middle" class="font node-tag" fill="#fde68a">GOVERNANCE</text>
+    <text x="14" y="44" class="font node-title">Human Approval Gate</text>
+    <text x="14" y="62" class="font node-sub">GitHub Issue · CAB Review</text>
+  </g>
+
+  <!-- Edge: Human Approval Gate -> Update Lambda Memory -->
+  <path d="M 662 670 L 790 670 L 790 608" class="flow-line" stroke="#34d399" marker-end="url(#arrowEmerald)"/>
+  <text x="726" y="659" text-anchor="middle" class="font edge-label" fill="#6ee7b7">Approved</text>
+  <circle r="3.5" fill="#6ee7b7" filter="url(#glowEmerald)">
+    <animateMotion dur="2s" begin="0.8s" repeatCount="indefinite" path="M 662 670 L 790 670 L 790 608"/>
+  </circle>
+
+  <!-- Node: Update Lambda Memory -->
+  <g transform="translate(686, 526)">
+    <rect width="208" height="80" rx="12" fill="#26190d" stroke="#fb923c" stroke-width="1.8"/>
+    <rect x="12" y="11" width="68" height="16" rx="8" fill="#431407"/>
+    <text x="46" y="22.5" text-anchor="middle" class="font node-tag" fill="#fdba74">OPTIMIZE</text>
+    <text x="14" y="46" class="font node-title">Update Lambda Memory</text>
+    <text x="14" y="65" class="font node-sub">Apply Optimal MB Config</text>
+  </g>
+
+  <!-- Edge: Update Lambda Memory -> Newman / Postman -->
+  <path d="M 894 566 L 942 566" class="flow-line" stroke="#fb923c" marker-end="url(#arrowOrange)"/>
+  <circle r="3.5" fill="#fdba74" filter="url(#glowOrange)">
+    <animateMotion dur="1.2s" repeatCount="indefinite" path="M 894 566 L 942 566"/>
+  </circle>
+
+  <!-- Node: Postman + Newman -->
+  <g transform="translate(944, 526)">
+    <rect width="220" height="80" rx="12" fill="#27170e" stroke="#f97316" stroke-width="1.6"/>
+    <rect x="12" y="11" width="76" height="16" rx="8" fill="#431407"/>
+    <text x="50" y="22.5" text-anchor="middle" class="font node-tag" fill="#fdba74">VALIDATION</text>
+    <text x="14" y="46" class="font node-title">Postman + Newman</text>
+    <text x="14" y="65" class="font node-sub">API Smoke &amp; Load Tests</text>
+  </g>
+
+  <!-- Edge: Postman + Newman -> S3 Reports Bucket (straight up!) -->
+  <path d="M 1041 526 L 1041 442" class="flow-line" stroke="#34d399" marker-end="url(#arrowEmerald)"/>
+  <rect x="979" y="472" width="124" height="22" rx="11" fill="#0d261f" stroke="#10b981" stroke-width="1"/>
+  <text x="1041" y="487" text-anchor="middle" class="font edge-label" fill="#6ee7b7">Upload Evidence</text>
+  <circle r="3.5" fill="#6ee7b7" filter="url(#glowEmerald)">
+    <animateMotion dur="1.6s" repeatCount="indefinite" path="M 1041 526 L 1041 442"/>
+  </circle>
+
+  <!-- Footer Note -->
+  <text x="36" y="724" class="font subtitle" style="font-size:10.5px">AWS Lambda Power Tuning Pattern  ·  Terraform + Python 3.11 + Step Functions + Postman/Newman + GitHub OIDC</text>
+</svg>
