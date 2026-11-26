@@ -1,13 +1,13 @@
 variable "project" {
   description = "Project name prefix"
   type        = string
-  default     = "serverless-power-tuning"
+  default     = "esecure-power-tuning"
 }
 
 variable "aws_region" {
   description = "AWS region"
   type        = string
-  default     = "eu-west-2"
+  default     = "us-east-1"
 }
 
 variable "table_name" {

@@ -1,4 +1,4 @@
-# Region for power tuner — MUST be us-west-2 (official SAR release region)
+# Region for power tuner (aligned with primary deployment region)
 locals {
-  power_tuner_region = "us-west-2"
+  power_tuner_region = var.aws_region
 }

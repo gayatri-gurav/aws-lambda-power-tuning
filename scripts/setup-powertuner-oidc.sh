@@ -8,8 +8,8 @@ ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 GITHUB_ORG="gayatri-gurav"
 GITHUB_REPO="aws-lambda-power-tuning"
 ROLE_NAME="github-oidc-deploy-role"
-REGION="eu-west-2"
-SAR_APP_ARN="arn:aws:serverlessrepo:us-west-2:451282441545:applications/aws-lambda-power-tuning"
+REGION="us-east-1"
+SAR_APP_ARN="arn:aws:serverlessrepo:us-east-1:451282441545:applications/aws-lambda-power-tuning"
 # -----------------------------
 
 OIDC_PROVIDER="token.actions.githubusercontent.com"
@@ -39,10 +39,7 @@ cat > trust-policy.json <<EOF
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringLike": {
-          "token.actions.githubusercontent.com:sub": [
-            "repo:$GITHUB_ORG/$GITHUB_REPO:*",
-            "repo:$GITHUB_ORG/*:*"
-          ]
+          "token.actions.githubusercontent.com:sub": "repo:$GITHUB_ORG/$GITHUB_REPO:*"
         },
         "StringEquals": {
           "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"

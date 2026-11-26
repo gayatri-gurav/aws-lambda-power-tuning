@@ -16,7 +16,7 @@
             "secretKey": "{{awsSecretAccessKey}}",
             "sessionToken": "{{awsSessionToken}}",
             "service": "execute-api",
-            "region": "eu-west-2"
+            "region": "us-east-1"
           }
         },
         "method": "GET",
@@ -46,7 +46,7 @@
             "secretKey": "{{awsSecretAccessKey}}",
             "sessionToken": "{{awsSessionToken}}",
             "service": "execute-api",
-            "region": "eu-west-2"
+            "region": "us-east-1"
           }
         },
         "method": "POST",
@@ -94,7 +94,7 @@
             "secretKey": "{{awsSecretAccessKey}}",
             "sessionToken": "{{awsSessionToken}}",
             "service": "execute-api",
-            "region": "eu-west-2"
+            "region": "us-east-1"
           }
         },
         "method": "GET",

@@ -156,7 +156,7 @@ cd aws-lambda-power-tuning
 
 ### 2. Bootstrap Terraform Remote State (One-Time)
 
-Creates the S3 bucket (`serverless-power-tuning-tfstate`) and DynamoDB lock table (`serverless-power-tuning-tf-lock`) in `eu-west-2`:
+Creates the S3 bucket (`esecure-power-tuning-tfstate`) and DynamoDB lock table (`esecure-power-tuning-tf-lock`) in `us-east-1`:
 
 ```bash
 bash scripts/backend.sh
@@ -239,8 +239,8 @@ Defined in [infra/terraform/variables.tf](infra/terraform/variables.tf):
 
 | Variable | Type | Default | Description |
 |---|---|---|---|
-| `project` | `string` | `"serverless-power-tuning"` | Resource naming prefix |
-| `aws_region` | `string` | `"eu-west-2"` | Primary deployment region |
+| `project` | `string` | `"esecure-power-tuning"` | Resource naming prefix |
+| `aws_region` | `string` | `"us-east-1"` | Primary deployment region |
 | `table_name` | `string` | `"LambdaPowerTuningTable"` | DynamoDB table name |
 | `lambda_zip_path` | `string` | `"../../lambda/package.zip"` *(via `tfvars`)* | Path to packaged Lambda ZIP |
 | `ask_approval` | `bool` | `true` | `true` = require manual approval before memory update; `false` = auto-apply |
