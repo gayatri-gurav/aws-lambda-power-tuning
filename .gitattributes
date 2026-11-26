@@ -1,3 +1,5 @@
-# Exclude generated reports and visual assets from GitHub Linguist language statistics
-reports/** linguist-generated=true
-assets/** linguist-generated=true
+# Exclude generated HTML reports and SVG diagrams from GitHub language detection
+*.html linguist-detectable=false linguist-vendored
+*.svg linguist-detectable=false linguist-generated=true
+reports/* linguist-vendored linguist-detectable=false
+reports/*/* linguist-vendored linguist-detectable=false
