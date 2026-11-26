@@ -1,0 +1,19 @@
+output "invoke_url" {
+  value = "https://${aws_api_gateway_rest_api.api.id}.execute-api.${var.aws_region}.amazonaws.com/${aws_api_gateway_stage.prod.stage_name}"
+}
+
+output "power_tuner_arn" {
+  value  = aws_serverlessapplicationrepository_cloudformation_stack.power_tuner.outputs["StateMachineARN"]
+}
+
+output "ask_approval" {
+  value = var.ask_approval
+}
+
+output "power_tuner_region" {
+  value = local.power_tuner_region
+}
+
+output "reports_bucket_name" {
+  value = aws_s3_bucket.tuning_reports.bucket
+}
