@@ -45,6 +45,12 @@ Instead of guessing Lambda memory once and forgetting it, this project benchmark
   <img src="assets/architecture-flow.svg" alt="Automated AWS Lambda Power Tuning Architecture and CI/CD Automation Flow" width="100%" />
 </p>
 
+### End-to-End 9-Step Execution Flow
+
+<p align="center">
+  <img src="assets/pipeline-steps.svg" alt="Auto-playing 9-step AWS Lambda Power Tuning execution walkthrough" width="100%" />
+</p>
+
 ### Key Architectural Characteristics
 
 | Pillar | Implementation |
@@ -96,7 +102,8 @@ Benchmarked under a 2-minute ramp-up load test (10 virtual users):
 ```text
 .
 ├── assets/
-│   └── architecture-flow.svg      # Animated end-to-end architecture & CI/CD diagram
+│   ├── architecture-flow.svg      # Animated end-to-end architecture & CI/CD diagram
+│   └── pipeline-steps.svg         # Auto-playing 9-step execution walkthrough diagram
 ├── infra/terraform/
 │   ├── apigateway.tf              # REST API (/items, /items/{id}) + prod stage
 │   ├── backend.tf                 # S3 remote state + DynamoDB locking + AWS providers
